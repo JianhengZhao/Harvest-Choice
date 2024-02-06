@@ -1,5 +1,5 @@
 # Input data
-Data_Clean <- read.csv("Data/DataV0.csv",check.names=FALSE)
+Data_Clean <- read.csv("Data/Data_V0.csv",check.names=FALSE)
 
 ## Convert dependent variables to factors 
 columns <- c("ChoiceSawlog", "ChoicePulp", "ChoiceLD", "ChoiceTot")
