@@ -17,8 +17,8 @@ Harvest Choice
 We estimated both harvest choices separately for sawlogs and pulp logs. Data were compiled on removals by timber type, location, elevation, and other site characteristics for matched plots for each period.
 
 ### Codes Steps
-The steps to run this model includes: 
-1. Data setup: This step should be run via the Data_Clean.R with the original data file Data_V0.csv, generating results output Data_Clean.CSV.
+The steps to run this model include: 
+1. Data setup: This step should be run via the Data_Clean.R with the original data file Data_V0.csv, generating results output Data_Clean_V1.CSV.
 2. Growth Vloum: This step should be run via the Growth. R with the Growth.csv, generating parameters output Growth_Est.csv.
 3. Harvest Intensity: This step should be run via the Intensity. R with the Data_Clean.csv, generating results output Data_CleanV2.csv.
 4. Harvest Choice: This step should be run via the Harvest. R with the Data_CleanV2.csv, and Growth_Est.csv, generating model estimates.
