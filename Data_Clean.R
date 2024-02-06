@@ -1,33 +1,31 @@
 # Input data
-Data_Clean <- read.csv("Data/Data_V0.csv",check.names=FALSE)
+Data_V0 <- read.csv("Data/Data_V0.csv",check.names=FALSE)
 
 ## Convert dependent variables to factors 
 columns <- c("ChoiceSawlog", "ChoicePulp", "ChoiceLD", "ChoiceTot")
 for (col in columns) {
-  Data_Clean[[col]] <- as.factor(Data_Clean[[col]])
-  levels(Data_Clean[[col]]) <- c("None", "Partial", "Final")
+  Data_V0[[col]] <- as.factor(Data_V0[[col]])
+  levels(Data_V0[[col]]) <- c("None", "Partial", "Final")
 }
 
 ## Distance conversion to kilometers 
 distance_columns <- c("Distance.roadsegment.", "Distance.Rail.", "Distance.national_highway.", "Distance.State.road.")
 for (col in distance_columns) {
-  Data_Clean[[col]] <- Data_Clean[[col]] * 111.32
+  Data_V0[[col]] <- Data_V0[[col]] * 111.32
 }
 ## Feet to Meter ##
-Data_Clean$ELEV<-Data_Clean$ELEV*0.3048
+Data_V0$ELEV<-Data_V0$ELEV*0.3048
 
 ## Land value acre to ha ##
-Data_Clean$AVG_val_ac<-Data_Clean$AVG_val_ac*2.47
+Data_V0$AVG_val_ac<-Data_V0$AVG_val_ac*2.47
 
 ## Conservation Land
-Data_Clean$Conservation_Type<-as.factor(Data_Clean$Conservation_Type )
-levels(Data_Clean$Conservation_Type ) <- c("non-conserved","Private","Public")
+Data_V0$Conservation_Type<-as.factor(Data_V0$Conservation_Type )
+levels(Data_V0$Conservation_Type ) <- c("non-conserved","Private","Public")
 
 ## Other conversion 
-Data_Clean$County<-as.factor(Data_Clean$county)
-Data_Clean$Year<-as.factor(Data_Clean$year)
-Data_Clean$ELEV<-as.numeric(Data_Clean$ELEV)
+Data_V0$County<-as.factor(Data_V0$county)
+Data_V0$Year<-as.factor(Data_V0$year)
+Data_V0$ELEV<-as.numeric(Data_V0$ELEV)
 
-# Output
-write.csv(Data_Clean, "Data_Clean.csv")
-
+write.csv(Data_V0, "Data_Clean_V0.csv")
