@@ -22,7 +22,7 @@ The sequence to run this model includes:
 2. Growth Vloum: This step should be run via the Growth. R with the Growth.csv
 3. Harvest Intensity: This step should be run via the Intensity. R with the Data_Clean.csv
 4. Harvest Choice: 
-This step should be run via the GAMS command and saved as s = GTM_Leakage_Calibration.g00
+
 
 
 
