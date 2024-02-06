@@ -1,11 +1,4 @@
-######## Growth ########
-rm(list=ls(all=TRUE))
-library(readr)
-
-
 # setting dictionary file
-setwd("C:/Users/Jianheng/OneDrive - University of Maine System/Desktop/Paper_Project/3.Timber_Supply/Organized Codes")
-getwd()
 Growth <- read.csv("Data/Growth_V0.csv",check.names=FALSE)
 
 
