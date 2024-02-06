@@ -62,4 +62,4 @@ for (type in biomass_types) {
 }
 print(Growth_Est)
 
-
+write.csv(Growth_Est, "Growth_Est.csv")
