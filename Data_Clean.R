@@ -21,11 +21,11 @@ Data_V0$AVG_val_ac<-Data_V0$AVG_val_ac*2.47
 
 ## Conservation Land
 Data_V0$Conservation_Type<-as.factor(Data_V0$Conservation_Type )
-levels(Data_V0$Conservation_Type ) <- c("non-conserved","Private","Public")
+levels(Data_V0$Conservation_Type ) <- c("non-conserved", "Private", "Public")
 
 ## Other conversion 
 Data_V0$County<-as.factor(Data_V0$county)
 Data_V0$Year<-as.factor(Data_V0$year)
 Data_V0$ELEV<-as.numeric(Data_V0$ELEV)
 
-write.csv(Data_V0, "Data_Clean_V0.csv")
+write.csv(Data_V0, "Data_Clean_V0.csv", row.names = FALSE)
