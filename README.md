@@ -18,9 +18,9 @@ We estimated both harvest choices separately for sawlogs and pulplogs. Data were
 
 ### Codes Steps
 The sequence to run this model includes: 
-1. Data setup: This step should be run via the Data_clean.R with original data.file, generating results output:
-2. Growth Vloum: This step should be run via the Growth.R with the Growth.csv
-3. Harvest Intensity:
+1. Data setup: This step should be run via the Data_Clean.R with the original data file Data_V0, generating results output Data_Clean.CSV:
+2. Growth Vloum: This step should be run via the Growth. R with the Growth.csv
+3. Harvest Intensity: This step should be run via the Intensity. R with the Data_Clean.csv
 4. Harvest Choice: 
 This step should be run via the GAMS command and saved as s = GTM_Leakage_Calibration.g00
 
