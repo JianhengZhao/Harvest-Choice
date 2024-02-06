@@ -19,8 +19,8 @@ scatter.smooth(x=Data_Saw$Sawintensity, Data_Saw$ratioSawlog,col="red", main="Gr
 
 ## All data
 Data_Clean_V1$Sawintensity<-predict(I1, newdata=Data_Clean_V1, type="response")
-Data_Clean_V1<-subset(Data_Clean_V1, ratioSawlog>0&ratioSawlog<0.7)
-with(Data_Clean_V1, cor(Sawintensity, ratioSawlog))
+Data_Clean_temp<-subset(Data_Clean_V1, ratioSawlog>0&ratioSawlog<0.7)
+with(Data_Clean_temp, cor(Sawintensity, ratioSawlog))
 
 
 
@@ -38,11 +38,11 @@ with(Data_Pulp, cor(Pulpintensity, ratioPulp))
 
 ## All data
 Data_Clean_V1$Pulpintensity<-predict(I2, newdata=Data_Clean_V1, type="response")
-Data_Clean_V1<-subset(Data_Clean_V1, ratioPulp>0&ratioPulp<0.7)
-with(Data_Clean_V1, cor(Pulpintensity, ratioPulp))
+Data_Clean_temp<-subset(Data_Clean_V1, ratioPulp>0&ratioPulp<0.7)
+with(Data_Clean_temp, cor(Pulpintensity, ratioPulp))
 scatter.smooth(x=Data_Clean_V1$Pulpintensity, Data_Clean_V1$ratioPulp,col="red", main="Growth")
 
-write.csv(Data_Clean_V1, "Data_Clean_V2.csv")
+write.csv(Data_Clean_V1, "Data_Clean_V2.csv", row.names = FALSE)
 
 
 
