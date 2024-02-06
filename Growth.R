@@ -1,10 +1,6 @@
-######## Growth ########
-rm(list=ls(all=TRUE))
-library(readr)
-
 # setting dictionary file
-Growth <- read.csv("Data/Growth.csv",check.names=FALSE)
-
+Growth <- read.csv("Growth.csv",check.names=FALSE)
+Data_Clean_V0 <-read.csv("Data_Clean_V0.csv",check.names=FALSE)
 
 # Function to process data (Total  & Biomass & Pulp & Pallet & PulpLD)
 process_data <- function(Growth, year, type) {
@@ -60,7 +56,6 @@ for (type in biomass_types) {
   results_df <- rbind(results_df, data.frame(BiomassType=type, Intercept=coefficients["(Intercept)"], T0=coefficients["T0"], IT0_sqrt=coefficients["I(T0^(1/2))"]))
 }
 
-
 ##  Sawlog Growth 
 Data_Clean_V0$post<-Data_Clean_V0$L_BioSaw-Data_Clean_V0$HarvSawlog
 Data_Clean_V0$postend<-results_df[2,2]+results_df[2,3]*Data_Clean_V0$post+results_df[2,4]*Data_Clean_V0$post^(1/2)
@@ -72,4 +67,4 @@ Data_Clean_V0$postendp<-results_df[3,2]+results_df[3,3]*Data_Clean_V0$postp+resu
 Data_Clean_V0$postGrowthp<-Data_Clean_V0$postendp-Data_Clean_V0$postp
 Data_Clean_V0$postGrowth_sqrp<-Data_Clean_V0$postGrowthp*Data_Clean_V0$postGrowthp
 
-write.csv(Data_Clean_V0, "Data_Clean_V1.csv")
+write.csv(Data_Clean_V0, "Data_Clean_V1.csv", row.names = FALSE)
