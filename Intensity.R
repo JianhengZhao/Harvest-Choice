@@ -43,6 +43,9 @@ Data_Clean2<-subset(Data_Clean, ratioPulp>0&ratioPulp<0.7)
 with(Data_Clean2, cor(Pulpintensity, ratioPulp))
 scatter.smooth(x=Data_Clean$Pulpintensity, Data_Clean$ratioPulp,col="red", main="Growth")
 
+# Output
+write.csv(Data_Clean, "Data_CleanV2.csv")
+
 
 
 
