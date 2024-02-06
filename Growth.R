@@ -1,7 +1,6 @@
 # setting dictionary file
 Growth <- read.csv("Data/Growth.csv",check.names=FALSE)
 
-
 # Function to process data (Total  & Biomass & Pulp & Pallet & PulpLD)
 process_data <- function(Growth, year, type) {
   previous_year <- as.character(as.numeric(year) - 5)
@@ -33,7 +32,6 @@ perform_regression_analysis <- function(data) {
   coef(linearMod3)
 }
 
-
 # Process and analyze data for different types and years
 process_and_analyze <- function(type) {
   data2006 <- process_data(Growth, "2006", type)
@@ -49,10 +47,22 @@ process_and_analyze <- function(type) {
 # Outputs
 biomass_types <- c("Tot", "Saw", "Pulp", "PulpLD", "Pallet")
 results_df <- data.frame(BiomassType=character(), Intercept=numeric(), T0=numeric(), IT0_sqrt=numeric(), stringsAsFactors=FALSE)
+
 for (type in biomass_types) {
   coefficients <- process_and_analyze(type)
-  Growth_Est <- rbind(results_df, data.frame(BiomassType=type, Intercept=coefficients["(Intercept)"], T0=coefficients["T0"], IT0_sqrt=coefficients["I(T0^(1/2))"]))
-}
-print(Growth_Est)
 
-write.csv(Growth_Est, "Growth_Est.csv")
+  results_df <- rbind(results_df, data.frame(BiomassType=type, Intercept=coefficients["(Intercept)"], T0=coefficients["T0"], IT0_sqrt=coefficients["I(T0^(1/2))"]))
+}
+
+##  Sawlog Growth 
+Data_Clean_V0$post<-Data_Clean_V0$L_BioSaw-Data_Clean_V0$HarvSawlog
+Data_Clean_V0$postend<-results_df[2,2]+results_df[2,3]*Data_Clean_V0$post+results_df[2,4]*Data_Clean_V0$post^(1/2)
+Data_Clean_V0$postGrowth<-Data_Clean_V0$postend-Data_Clean_V0$post
+Data_Clean_V0$postGrowth_sqr<-Data_Clean_V0$postGrowth*Data_Clean_V0$postGrowth
+##  Pulpwood Growth 
+Data_Clean_V0$postp<-Data_Clean_V0$L_BioPulp-Data_Clean_V0$HarvPulp
+Data_Clean_V0$postendp<-results_df[3,2]+results_df[3,3]*Data_Clean_V0$postp+results_df[3,4]*Data_Clean_V0$postp^(1/2)
+Data_Clean_V0$postGrowthp<-Data_Clean_V0$postendp-Data_Clean_V0$postp
+Data_Clean_V0$postGrowth_sqrp<-Data_Clean_V0$postGrowthp*Data_Clean_V0$postGrowthp
+
+write.csv(Data_Clean_V0, "Data_Clean_V1.csv")
