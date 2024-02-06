@@ -1,5 +1,13 @@
+######## Growth ########
+rm(list=ls(all=TRUE))
+library(readr)
+
+
 # setting dictionary file
+setwd("C:/Users/Jianheng/OneDrive - University of Maine System/Desktop/Paper_Project/3.Timber_Supply/Organized Codes")
+getwd()
 Growth <- read.csv("Data/Growth.csv",check.names=FALSE)
+
 
 # Function to process data (Total  & Biomass & Pulp & Pallet & PulpLD)
 process_data <- function(Growth, year, type) {
@@ -32,6 +40,7 @@ perform_regression_analysis <- function(data) {
   coef(linearMod3)
 }
 
+
 # Process and analyze data for different types and years
 process_and_analyze <- function(type) {
   data2006 <- process_data(Growth, "2006", type)
@@ -53,6 +62,7 @@ for (type in biomass_types) {
 
   results_df <- rbind(results_df, data.frame(BiomassType=type, Intercept=coefficients["(Intercept)"], T0=coefficients["T0"], IT0_sqrt=coefficients["I(T0^(1/2))"]))
 }
+
 
 ##  Sawlog Growth 
 Data_Clean_V0$post<-Data_Clean_V0$L_BioSaw-Data_Clean_V0$HarvSawlog
