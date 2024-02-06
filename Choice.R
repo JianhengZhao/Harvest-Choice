@@ -1,7 +1,14 @@
 library("nnet") 
 Data_Clean_V2 <- read.csv("Data_Clean_V2.csv",check.names=FALSE)
 
-## Relevel the factor to make 'None' the reference level
+# Convert dependent variables to factors 
+columns <- c("ChoiceSawlog", "ChoicePulp", "ChoiceLD", "ChoiceTot")
+for (col in columns) {
+  Data_Clean_V2[[col]] <- as.factor(Data_Clean_V2[[col]])
+  levels(Data_Clean_V2[[col]]) <- c("None", "Partial", "Final")
+}
+
+# Relevel the factor to make 'None' the reference level
 columns <- c("ChoiceSawlog", "ChoicePulp", "ChoiceLD", "ChoiceTot")
 for (col in columns) {
   new_col_name <- paste0(col, "0") # Create a new column name by appending '0'
