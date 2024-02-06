@@ -1,5 +1,5 @@
 # setting dictionary file
-Growth <- read.csv("Data/Growth_V0.csv",check.names=FALSE)
+Growth <- read.csv("Data/Growth.csv",check.names=FALSE)
 
 
 # Function to process data (Total  & Biomass & Pulp & Pallet & PulpLD)
