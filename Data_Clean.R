@@ -1,7 +1,5 @@
-setwd("C:/Users/Jianheng/OneDrive - University of Maine System/Desktop/Paper_Project/3.Timber_Supply/Organized Codes")
-getwd()
+# Input data
 Data_Clean <- read.csv("Data/DataV0.csv",check.names=FALSE)
-
 
 ## Convert dependent variables to factors 
 columns <- c("ChoiceSawlog", "ChoicePulp", "ChoiceLD", "ChoiceTot")
@@ -30,4 +28,6 @@ Data_Clean$County<-as.factor(Data_Clean$county)
 Data_Clean$Year<-as.factor(Data_Clean$year)
 Data_Clean$ELEV<-as.numeric(Data_Clean$ELEV)
 
+# Output
+write.csv(Data_Clean, "Data_Clean.csv")
 
