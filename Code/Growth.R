@@ -2,16 +2,7 @@
 rm(list=ls(all=TRUE))
 library(readr)
 
-# Import file
-Growth <- read.csv("C:/Users/Jianheng/OneDrive - University of Maine System/Desktop/Paper_Project/3.Timber_Supply/1.Harvest_Model/2.Data/Growth_LD_2nd_NA.csv",check.names=FALSE)
-
-
-# setting dictionary file
-
-setwd("C:/Users/Jianheng/OneDrive - University of Maine System/Desktop/Paper_Project/3.Timber_Supply/Organized Codes")
-getwd()
 Growth <- read.csv("Data/Growth_V0.csv",check.names=FALSE)
-
 
 # Function to process data (Total  & Biomass & Pulp & Pallet & PulpLD)
 process_data <- function(Growth, year, type) {
@@ -30,25 +21,17 @@ process_data <- function(Growth, year, type) {
     selected_data <- subset(Growth, Growth[[type_H]] == 0 & Growth[[type_B]] != 0 & Growth[[prev_type_B]] != 0)
     selected_data$T0 <- selected_data[[prev_type_B]]
     selected_data$T1 <- selected_data[[type_B]]
-  }
-  
+  }  
   return(selected_data[, c("T0", "T1")])
 }
-
 
 # Function to perform growth regression analysis
 perform_regression_analysis <- function(data) {
   linearMod1 <- lm(T1 ~ T0, data = data)
   linearMod2 <- lm(T1 ~ T0 + I(T0^2), data = data)
   linearMod3 <- lm(T1 ~ T0 + I(T0^(1/2)), data = data)
-  
-  print(summary(linearMod1))
-  print(summary(linearMod2))
-  print(summary(linearMod3))
-  print(summary(data$T0))
-  print(summary(data$T1))
+  coef(linearMod3)
 }
-
 
 # Process and analyze data for different types and years
 process_and_analyze <- function(type) {
@@ -57,16 +40,16 @@ process_and_analyze <- function(type) {
   data2016 <- process_data(Growth, "2016", type)
   
   combined_data <- rbind(data2006, data2011, data2016)
-  perform_regression_analysis(combined_data)
-  
+  perform_regression_analysis(combined_data)  
 }
 
-# Print out for different types
 
-process_and_analyze("Tot")     # For Total Biomass
-process_and_analyze("Saw")     # For Sawlog
-process_and_analyze("Pulp")    # For Pulp
-process_and_analyze("PulpLD")  # For PulpLD
-process_and_analyze("Pallet")  # For Pallet
-
+# Outputs
+biomass_types <- c("Tot", "Saw", "Pulp", "PulpLD", "Pallet")
+results_df <- data.frame(BiomassType=character(), Intercept=numeric(), T0=numeric(), IT0_sqrt=numeric(), stringsAsFactors=FALSE)
+for (type in biomass_types) {
+  coefficients <- process_and_analyze(type)
+  Growth_Est <- rbind(results_df, data.frame(BiomassType=type, Intercept=coefficients["(Intercept)"], T0=coefficients["T0"], IT0_sqrt=coefficients["I(T0^(1/2))"]))
+}
+print(Growth_Est)
 
