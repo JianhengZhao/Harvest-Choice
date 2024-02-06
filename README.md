@@ -21,7 +21,7 @@ The steps to run this model include:
 1. Data setup: This step should be run via the Data_Clean.R with the original data file Data_V0.csv, generating results output Data_Clean_V0.csv.
 2. Growth Vloum: This step should be run via the Growth. R with the Growth.csv and Data_Clean_V0.csv, generating parameters output Data_Clean_V1.csv
 3. Harvest Intensity: This step should be run via the Intensity. R with the Data_Clean_V1.csv, generating results output Data_Clean_V2.csv.
-4. Harvest Choice: This step should be run via the Harvest. R with the Data_CleanV2.csv, and Growth_Est.csv, generating model estimates.
+4. Harvest Choice: This step should be run via the Choice. R with the Data_Clean_V2.csv, generating model estimates.
 
 
 
