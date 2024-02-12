@@ -39,7 +39,6 @@ process_and_analyze <- function(type) {
   data2006 <- process_data(Growth, "2006", type)
   data2011 <- process_data(Growth, "2011", type)
   data2016 <- process_data(Growth, "2016", type)
-  
   combined_data <- rbind(data2006, data2011, data2016)
   perform_regression_analysis(combined_data)
   
@@ -52,7 +51,6 @@ results_df <- data.frame(BiomassType=character(), Intercept=numeric(), T0=numeri
 
 for (type in biomass_types) {
   coefficients <- process_and_analyze(type)
-
   results_df <- rbind(results_df, data.frame(BiomassType=type, Intercept=coefficients["(Intercept)"], T0=coefficients["T0"], IT0_sqrt=coefficients["I(T0^(1/2))"]))
 }
 
