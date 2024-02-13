@@ -38,10 +38,10 @@ deviance(P)
 logLik(P)
 AIC(P)
 ## Log-likelihoods for full model and 0-model without predictors ##
-S0<-multinom(ChoiceSawlog0  ~ 1, data =mydata,na.action = na.exclude)
+S0<-multinom(ChoiceSawlog0  ~ 1, data =Data_Clean_V2,na.action = na.exclude)
 LLf<-logLik(S)
 LL0<-logLik(S0)
-P0<-multinom(ChoicePulp0  ~ 1, data =mydata,na.action = na.exclude)
+P0<-multinom(ChoicePulp0  ~ 1, data =Data_Clean_V2,na.action = na.exclude)
 LLf<-logLik(P)
 LL0<-logLik(P0)
 ## McFadden pseudo-R2
