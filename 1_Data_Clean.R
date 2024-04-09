@@ -1,5 +1,5 @@
 #Set a working directory for this model
-setwd("")
+setwd("C:/Users/download place")
 
 # Input data
 Data_V0 <- read.csv("Data_V0.csv",check.names=FALSE)
