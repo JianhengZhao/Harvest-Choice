@@ -5,7 +5,7 @@ library(splines)
 library(VGAM)
 
 # setting dictionary file
-Data_Clean_V1 <- read.csv("Data/Data_Clean_V1.csv",check.names=FALSE)
+Data_Clean_V1 <- read.csv("Data_Clean_V1.csv",check.names=FALSE)
 
 #sawlog intensity
 Data_Saw <- subset(Data_Clean_V1, ratioSawlog > 0 & ratioSawlog < 0.7)
