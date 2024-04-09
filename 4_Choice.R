@@ -1,6 +1,7 @@
 install.packages("stargazer")
 library("stargazer")
 library("nnet") 
+library("dplyr")
 
 # Input data
 Data_Clean_V2 <- read.csv("Data_Clean_V2.csv",check.names=FALSE)
@@ -32,13 +33,13 @@ Data_Clean_V2$Ownership<-as.factor(Data_Clean_V2$Ownership)
 Data_Clean_V2$Ownership <- relevel(Data_Clean_V2$Ownership, ref = "FAMILY")
 
 #************************************#
-S <- multinom(ChoiceSawlog0  ~ PriceSaw_county + PricePulp_county  + L_BioTot + BioTot +postGrowth+postGrowth_sqr+SWMills +AVG_val_ac +Distance.national_highway.+County +Conservation_Type+ELEV+Year+Coastal, data =Data_Clean_V2,na.action = na.exclude )
+S <- multinom(ChoiceSawlog0  ~ PriceSaw_county + PricePulp_county  + L_BioTot + BioTot +postGrowth+postGrowth_sqr+SWMills +AVG_val_ac +Distance.national_highway.+County +ELEV+Year+Coastal+Conserve+Ownership, data =Data_Clean_V2,na.action = na.exclude )
 stargazer(S, title="Sawlog Combined", align=TRUE, dep.var.labels=c("Thinning","Final"),
           no.space=TRUE, type="text", out="Sawlog.htm")
 
 #************************************#
 
-P <-multinom(ChoicePulp0  ~ PriceSaw_county + PricePulp_county +L_BioTot +BioPulpLD+postGrowthp+postGrowth_sqrp+PulpMills+AVG_val_ac+Distance.national_highway.+County+Conservation_Type +ELEV+Year+Coastal, data =Data_Clean_V2,na.action = na.exclude )
+P <-multinom(ChoicePulp0  ~ PriceSaw_county + PricePulp_county +L_BioTot +BioPulpLD+postGrowthp+postGrowth_sqrp+PulpMills+AVG_val_ac+Distance.national_highway.+County+ELEV+Year+Coastal+Conserve+Ownership, data =Data_Clean_V2,na.action = na.exclude )
 
 stargazer(P, title="pulpwood Combined", align=TRUE, dep.var.labels=c("Thinning","Final"),
           no.space=TRUE, type="text", out="Pulplog.htm")
