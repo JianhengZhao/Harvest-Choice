@@ -19,6 +19,18 @@ for (col in columns) {
   Data_Clean_V2[[new_col_name]] <- relevel(Data_Clean_V2[[col]], ref= "None")
 }
 
+Data_Clean_V2$Conserve<-as.factor(Data_Clean_V2$Conserve)
+levels(Data_Clean_V2$Conserve) <- c("non-conserved","Conserved")
+
+## aggregate Ownership 
+Data_Clean_V2 <- Data_Clean_V2 %>%
+  mutate(Ownership = as.factor(case_when(
+    Ownership %in% c("STATE", "FEDERAL", "LOCAL") ~ "Government",
+    TRUE ~ as.character(Ownership)
+  )))
+Data_Clean_V2$Ownership<-as.factor(Data_Clean_V2$Ownership)
+Data_Clean_V2$Ownership <- relevel(Data_Clean_V2$Ownership, ref = "FAMILY")
+
 #************************************#
 S <- multinom(ChoiceSawlog0  ~ PriceSaw_county + PricePulp_county  + L_BioTot + BioTot +postGrowth+postGrowth_sqr+SWMills +AVG_val_ac +Distance.national_highway.+County +Conservation_Type+ELEV+Year+Coastal, data =Data_Clean_V2,na.action = na.exclude )
 stargazer(S, title="Sawlog Combined", align=TRUE, dep.var.labels=c("Thinning","Final"),
