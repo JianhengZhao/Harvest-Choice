@@ -9,15 +9,11 @@ distance_columns <- c("Distance.roadsegment.", "Distance.Rail.", "Distance.natio
 for (col in distance_columns) {
   Data_V0[[col]] <- Data_V0[[col]] * 111.32
 }
-## Feet to Meter ##
-Data_V0$ELEV<-Data_V0$ELEV*0.3048
+
 
 ## Land value acre to ha ##
 Data_V0$AVG_val_ac<-Data_V0$AVG_val_ac*2.47
 
-## Conservation Land
-Data_V0$Conservation_Type<-as.factor(Data_V0$Conservation_Type )
-levels(Data_V0$Conservation_Type ) <- c("non-conserved","Private","Public")
 
 ## Other conversion 
 Data_V0$County<-as.factor(Data_V0$County)
